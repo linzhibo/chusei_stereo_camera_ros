@@ -17,7 +17,7 @@ with depth:
 ```
 ROS_NAMESPACE=stereo rosrun stereo_image_proctereo_image_proc
 ```
-<img src="coke.png" alt="drawing" width="300"/>
+<img src="pics_for_readme/coke.png" alt="drawing" width="300"/>
 
 >run rqt reconfigure for disparity map's dynamic reconfiguration
 
@@ -25,4 +25,6 @@ disparity map:
 ```
 rosrun image_view disparity_view image:=/stereo/disparity
 ```
-<img src="disparity.png" alt="drawing" width="500"/>
+<img src="pics_for_readme/disparity.png" alt="drawing" width="500"/>
+3d scene
+<img src="pics_for_readme/stereo_long_distance.gif" alt="drawing" width="500"/>

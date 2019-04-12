@@ -84,32 +84,33 @@ class LittleStereoCam():
         # left_cam_info = self.yaml_to_camera_info(self.left_yaml_file)
         # right_cam_info = self.yaml_to_camera_info(self.right_yaml_file)
         left_cam_info = CameraInfo()
-        left_cam_info.width = 320
-        left_cam_info.height = 240
-        left_cam_info.K = [428.742281, 0.000000, 156.350849, 0.000000, 428.925552, 128.154488, 0.000000, 0.000000, 1.000000]
-        left_cam_info.D = [0.145034, -0.494188, 0.011364, -0.015166, 0.000000]
-        left_cam_info.R = [0.964297, 0.000775, 0.264822, -0.002139, 0.999986, 0.004861, -0.264815, -0.005254, 0.964285]
-        left_cam_info.P = [486.886495, 0.000000, 2.254309, 0.000000, 0.000000, 486.886495, 121.254906, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
+        left_cam_info.width = 640
+        left_cam_info.height = 480
+        left_cam_info.K = [883.998642, 0.000000, 349.540253, 0.000000, 887.969815, 247.902874, 0.000000, 0.000000, 1.000000]
+        left_cam_info.D = [0.125962, -0.905045, 0.006512, 0.007531, 0.000000]
+        left_cam_info.R = [0.985389, 0.006639, 0.170189, -0.004920, 0.999933, -0.010521, -0.170248, 0.009530, 0.985355]
+        left_cam_info.P = [1022.167889, 0.000000, 150.220785, 0.000000, 0.000000, 1022.167889, 249.024044, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
         left_cam_info.distortion_model = 'plumb_bob'
 
         right_cam_info = CameraInfo()
-        right_cam_info.width = 320
-        right_cam_info.height = 240
-        right_cam_info.K = [416.679011, 0.000000, 164.113939, 0.000000, 416.632961, 113.014961, 0.000000, 0.000000, 1.000000]
-        right_cam_info.D = [0.101117, -0.318121, -0.004195, 0.003498, 0.000000]
-        right_cam_info.R = [0.936555, 0.004652, 0.350489, -0.002834, 0.999980, -0.005699, -0.350508, 0.004344, 0.936550]
-        right_cam_info.P = [486.886495, 0.000000, 2.254309, -88.273173, 0.000000, 486.886495, 121.254906, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
+        right_cam_info.width = 640
+        right_cam_info.height = 480
+        right_cam_info.K = [874.019843, 0.000000, 331.121922, 0.000000, 875.918758, 244.867443, 0.000000, 0.000000, 1.000000]
+        right_cam_info.D = [0.041385, -0.059698, 0.005392, 0.009075, 0.000000]
+        right_cam_info.R = [0.976610, 0.003803, 0.214985, -0.005979, 0.999937, 0.009472, -0.214936, -0.010535, 0.976571]
+        right_cam_info.P = [1022.167889, 0.000000, 150.220785, -41.006903, 0.000000, 1022.167889, 249.024044, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]
         right_cam_info.distortion_model = 'plumb_bob'
 
-        rate = rospy.Rate(30)
+        rate = rospy.Rate(20)
         while not rospy.is_shutdown():
             ret,frame=self.cam.read()
             if not ret:
                 print('[ERROR]: frame error')
-                break
-            expand_frame=cv2.resize(frame,None,fx=1,fy=0.5)
-            left_image = expand_frame[0:240,0:320]
-            right_image = expand_frame[0:240,320:640]
+                break            
+            expand_frame=cv2.resize(frame,None,fx=2,fy=1)
+
+            left_image = expand_frame[0:480,0:640]
+            right_image = expand_frame[0:480,640:1280]
             
 
             self.msg_header.frame_id = 'stereo_image'
