@@ -3,7 +3,7 @@
 
 dependency:
 ```
-sudo apt install uvcdyrctrl
+sudo apt install uvcdynctrl
 ```
 if calibration needed:
 > http://wiki.ros.org/camera_calibration/Tutorials/StereoCalibration
