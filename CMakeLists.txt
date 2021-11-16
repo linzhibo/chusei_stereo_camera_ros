@@ -7,12 +7,29 @@ project(little_stereo_camera)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  cv_bridge
-  rospy
-  sensor_msgs
-  std_msgs
-)
+find_package(catkin QUIET)
+if( catkin_FOUND )
+    message("detected ROS1 (catkin_make)")
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/package.ros1.xml ${CMAKE_CURRENT_SOURCE_DIR}/package.xml COPYONLY)
+    find_package(catkin REQUIRED COMPONENTS
+                cv_bridge
+                rospy
+                sensor_msgs
+                std_msgs
+                )
+else()
+    find_package(ament_cmake QUIET)
+    if( ament_cmake_FOUND )
+        configure_file(${CMAKE_CURRENT_SOURCE_DIR}/package.ros2.xml ${CMAKE_CURRENT_SOURCE_DIR}/package.xml COPYONLY)
+        message("detected ROS2 (ament_cmake)")
+    else()
+        message(FATAL_ERROR "could not find either ROS1 (catkin_make) or ROS2 (ament_cmake) packages")
+    endif()
+    # install(FILES
+    #         ${CMAKE_CURRENT_SOURCE_DIR}/calibration/calibrationdata/left.yaml
+    #         ${CMAKE_CURRENT_SOURCE_DIR}/calibration/calibrationdata/right.yaml
+    #         DESTINATION lib/${PROJECT_NAME})
+endif()
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -103,6 +120,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+if( catkin_FOUND )
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES little_stereo_camera
@@ -120,6 +138,7 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
 )
+endif()
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}

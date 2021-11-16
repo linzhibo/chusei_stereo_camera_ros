@@ -1,7 +1,7 @@
 # Chusei 3d webcam ros package
 
 
-dependency:
+Dependency:
 ```
 sudo apt install uvcdynctrl
 ```
@@ -19,14 +19,17 @@ with depth:
 ```
 ROS_NAMESPACE=stereo rosrun stereo_image_proctereo_image_proc
 ```
-<img src="pics_for_readme/coke.png" alt="drawing" width="300"/>
+![coke](pics_for_readme/coke.png)
 
->run rqt reconfigure for disparity map's dynamic reconfiguration
-
+for disparity map's dynamic reconfiguration
+```
+rosrun rqt_reconfigure rqt_reconfigure
+```
 disparity map:
 ```
 rosrun image_view disparity_view image:=/stereo/disparity
 ```
-<img src="pics_for_readme/disparity.png" alt="drawing" width="500"/>
-3d scene
-<img src="pics_for_readme/stereo_long_distance.gif" alt="drawing" width="500"/>
+![disparity_map](pics_for_readme/disparity.png)
+
+![3d_scene](pics_for_readme/stereo_long_distance.gif)
+
