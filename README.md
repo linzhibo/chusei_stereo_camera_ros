@@ -19,7 +19,7 @@ with depth:
 ```
 ROS_NAMESPACE=stereo rosrun stereo_image_proctereo_image_proc
 ```
-![coke](pics_for_readme/coke.png?raw=true)
+![coke](pics_for_readme/coke.png)
 
 for disparity map's dynamic reconfiguration
 ```
@@ -29,7 +29,7 @@ disparity map:
 ```
 rosrun image_view disparity_view image:=/stereo/disparity
 ```
-![disparity_map](pics_for_readme/disparity.png?raw=true)
+![disparity_map](pics_for_readme/disparity.png)
 
-![3d_scene](pics_for_readme/stereo_long_distance.gif?raw=true)
+![3d_scene](pics_for_readme/stereo_long_distance.gif)
 
